@@ -1,10 +1,15 @@
 console.log('app.js is running!');
 
 // JSX - JavaScript XML
+
+var app = {
+  title: 'Welcome to the Indecision App!',
+  subtitle: 'We will help you make up your mind!'
+};
 var template = (
   <div>
-    <h1>Indecision App</h1>
-    <p>This is some info</p>
+    <h1>{app.title}</h1>
+    <p>{app.subtitle}</p>
     <ol>
       <li>Item one</li>
       <li>Item two</li>
@@ -12,14 +17,20 @@ var template = (
   </div>
 );
 
+var user = {
+  name: 'Ylva Turner',
+  age: 30,
+  location: 'Edinburgh'
+};
+
 var templateTwo = (
   <div>
-    <h1>Ylva Turner</h1>
-    <p>Age: 30</p>
-    <p>Location: Edinburgh</p>
+    <h1>{user.name}</h1>
+    <p>Age: {user.age}</p>
+    <p>Location: {user.location}</p>
   </div>
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
