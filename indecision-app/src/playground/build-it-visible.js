@@ -1,5 +1,6 @@
 const appRoot = document.getElementById('app');
 
+// MY SOLUTION //
 let buttonMessage = 'Show details';
 let message = '';
 
@@ -26,5 +27,28 @@ const renderVisibilityApp = () => {
 
   ReactDOM.render(template, appRoot);
 };
+
+// COURSE SOLUTION //
+
+let visibility = false;
+
+// const toggleVisibility = () => {
+//   visibility = !visibility;
+//   renderVisibilityApp();
+// };
+
+// const renderVisibilityApp = () => {
+//   const jsx = (
+//     <div>
+//       <h1>Visibility Toggle!</h1>
+//       <button onClick={toggleVisibility}>
+//         {visibility ? 'Hide details' : 'Show details'}
+//       </button>
+//       {visibility && <p>Hey. These are some details you can now see!</p>}
+//     </div>
+//   );
+
+//   ReactDOM.render(jsx, appRoot);
+// };
 
 renderVisibilityApp();
