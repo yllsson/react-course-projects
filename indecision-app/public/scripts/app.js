@@ -25,11 +25,16 @@ var removeAllOptions = function removeAllOptions() {
 };
 
 var appRoot = document.getElementById('app');
+var numbers = [55, 101, 1000];
 
 var renderApp = function renderApp() {
   var template = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, app.title), app.subtitle && /*#__PURE__*/React.createElement("p", null, app.subtitle), /*#__PURE__*/React.createElement("p", null, app.options.length > 0 ? 'These are your options' : 'You have no options'), /*#__PURE__*/React.createElement("p", null, app.options.length), /*#__PURE__*/React.createElement("button", {
     onClick: removeAllOptions
-  }, "Remove All"), /*#__PURE__*/React.createElement("ol", null, /*#__PURE__*/React.createElement("li", null, "Item one"), /*#__PURE__*/React.createElement("li", null, "Item two")), /*#__PURE__*/React.createElement("form", {
+  }, "Remove All"), /*#__PURE__*/React.createElement("ol", null, app.options.map(function (option, idx) {
+    return /*#__PURE__*/React.createElement("li", {
+      key: idx
+    }, option);
+  })), /*#__PURE__*/React.createElement("form", {
     onSubmit: onFormSubmit
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
