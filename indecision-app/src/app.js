@@ -5,10 +5,10 @@ console.log('app.js is running!');
 const app = {
   title: 'Welcome to the Indecision App!',
   subtitle: 'We will help you make up your mind!',
-  options: [],
+  options: []
 };
 
-const onFormSubmit = (e) => {
+const onFormSubmit = e => {
   e.preventDefault();
 
   const option = e.target.elements.option.value;
