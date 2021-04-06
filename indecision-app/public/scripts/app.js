@@ -2,9 +2,11 @@
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -20,106 +22,143 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var IndecisionApp = /*#__PURE__*/function (_React$Component) {
+  _inherits(IndecisionApp, _React$Component);
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+  var _super = _createSuper(IndecisionApp);
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+  function IndecisionApp() {
+    _classCallCheck(this, IndecisionApp);
 
-var Person = /*#__PURE__*/function () {
-  function Person() {
-    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
-    var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-    _classCallCheck(this, Person);
-
-    this.name = name;
-    this.age = age;
+    return _super.apply(this, arguments);
   }
 
-  _createClass(Person, [{
-    key: "getGreeting",
-    value: function getGreeting() {
-      return "Hi. I am ".concat(this.name, "!");
-    }
-  }, {
-    key: "getDescription",
-    value: function getDescription() {
-      return "".concat(this.name, " is ").concat(this.age, " year(s) old.");
+  _createClass(IndecisionApp, [{
+    key: "render",
+    value: function render() {
+      var title = 'Indecision';
+      var subtitle = 'Put your life in the hands of a computer';
+      var options = ['Thing one', 'Thing two', 'Thing four'];
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
+        title: title,
+        subtitle: subtitle
+      }), /*#__PURE__*/React.createElement(Action, null), /*#__PURE__*/React.createElement(Options, {
+        options: options
+      }), /*#__PURE__*/React.createElement(AddOption, null));
     }
   }]);
 
-  return Person;
-}();
+  return IndecisionApp;
+}(React.Component);
 
-var Student = /*#__PURE__*/function (_Person) {
-  _inherits(Student, _Person);
+var Header = /*#__PURE__*/function (_React$Component2) {
+  _inherits(Header, _React$Component2);
 
-  var _super = _createSuper(Student);
+  var _super2 = _createSuper(Header);
 
-  function Student(name, age, major) {
-    var _this;
+  function Header() {
+    _classCallCheck(this, Header);
 
-    _classCallCheck(this, Student);
-
-    _this = _super.call(this, name, age);
-    _this.major = major;
-    return _this;
+    return _super2.apply(this, arguments);
   }
 
-  _createClass(Student, [{
-    key: "hasMajor",
-    value: function hasMajor() {
-      return !!this.major;
-    }
-  }, {
-    key: "getDescription",
-    value: function getDescription() {
-      var description = _get(_getPrototypeOf(Student.prototype), "getDescription", this).call(this);
-
-      if (this.hasMajor()) {
-        description += " Their major is ".concat(this.major, ".");
-      }
-
-      return description;
+  _createClass(Header, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, this.props.title), /*#__PURE__*/React.createElement("h2", null, this.props.subtitle));
     }
   }]);
 
-  return Student;
-}(Person);
+  return Header;
+}(React.Component);
 
-var Traveler = /*#__PURE__*/function (_Person2) {
-  _inherits(Traveler, _Person2);
+var Action = /*#__PURE__*/function (_React$Component3) {
+  _inherits(Action, _React$Component3);
 
-  var _super2 = _createSuper(Traveler);
+  var _super3 = _createSuper(Action);
 
-  function Traveler(name, age, homeLocation) {
-    var _this2;
+  function Action() {
+    _classCallCheck(this, Action);
 
-    _classCallCheck(this, Traveler);
-
-    _this2 = _super2.call(this, name, age);
-    _this2.homeLocation = homeLocation;
-    return _this2;
+    return _super3.apply(this, arguments);
   }
 
-  _createClass(Traveler, [{
-    key: "getGreeting",
-    value: function getGreeting() {
-      var greeting = _get(_getPrototypeOf(Traveler.prototype), "getGreeting", this).call(this);
-
-      if (!!this.homeLocation) {
-        greeting += " I'm visiting from ".concat(this.homeLocation, ".");
-      }
-
-      return greeting;
+  _createClass(Action, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", null, "What should I do?"));
     }
   }]);
 
-  return Traveler;
-}(Person);
+  return Action;
+}(React.Component);
 
-var me = new Traveler('Ylva Turner', 31, 'Edinburgh');
-console.log(me.getGreeting());
-var other = new Traveler();
-console.log(other.getGreeting());
+var Options = /*#__PURE__*/function (_React$Component4) {
+  _inherits(Options, _React$Component4);
+
+  var _super4 = _createSuper(Options);
+
+  function Options() {
+    _classCallCheck(this, Options);
+
+    return _super4.apply(this, arguments);
+  }
+
+  _createClass(Options, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("div", null, "I'm the Options component. My length is ", this.props.options.length, this.props.options.map(function (option) {
+        return /*#__PURE__*/React.createElement(Option, {
+          key: option,
+          optionText: option
+        });
+      }));
+    }
+  }]);
+
+  return Options;
+}(React.Component);
+
+var Option = /*#__PURE__*/function (_React$Component5) {
+  _inherits(Option, _React$Component5);
+
+  var _super5 = _createSuper(Option);
+
+  function Option() {
+    _classCallCheck(this, Option);
+
+    return _super5.apply(this, arguments);
+  }
+
+  _createClass(Option, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("div", null, this.props.optionText);
+    }
+  }]);
+
+  return Option;
+}(React.Component);
+
+var AddOption = /*#__PURE__*/function (_React$Component6) {
+  _inherits(AddOption, _React$Component6);
+
+  var _super6 = _createSuper(AddOption);
+
+  function AddOption() {
+    _classCallCheck(this, AddOption);
+
+    return _super6.apply(this, arguments);
+  }
+
+  _createClass(AddOption, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("div", null, "I'm the AddOption component");
+    }
+  }]);
+
+  return AddOption;
+}(React.Component);
+
+ReactDOM.render( /*#__PURE__*/React.createElement(IndecisionApp, null), document.getElementById('app'));
