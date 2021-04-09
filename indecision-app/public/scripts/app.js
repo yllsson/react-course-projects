@@ -105,16 +105,20 @@ var Options = /*#__PURE__*/function (_React$Component4) {
 
   var _super4 = _createSuper(Options);
 
-  function Options() {
+  function Options(props) {
+    var _this;
+
     _classCallCheck(this, Options);
 
-    return _super4.apply(this, arguments);
+    _this = _super4.call(this, props);
+    _this.handleRemoveAll = _this.handleRemoveAll.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Options, [{
     key: "handleRemoveAll",
     value: function handleRemoveAll() {
-      alert('All options removed!');
+      console.log(this.props.options); // alert('All options removed!');
     }
   }, {
     key: "render",
