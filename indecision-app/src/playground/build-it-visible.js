@@ -1,36 +1,72 @@
-const appRoot = document.getElementById('app');
-
-// MY SOLUTION //
-let buttonMessage = 'Show details';
-let message = '';
-
-const onShowDetails = () => {
-  if (buttonMessage === 'Show details') {
-    buttonMessage = 'Hide details';
-    message = 'Look at all the details!';
-  } else {
-    buttonMessage = 'Show details';
-    message = '';
+class VisibilityToggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleToggleVisibility = this.handleToggleVisibility.bind(this);
+    this.state = {
+      visibility: false,
+    };
   }
 
-  renderVisibilityApp();
-};
+  handleToggleVisibility() {
+    this.setState((prevState) => {
+      return {
+        visibility: !prevState.visibility,
+      };
+    });
+  }
 
-const renderVisibilityApp = () => {
-  const template = (
-    <div>
-      <h1>Visibility Toggle!</h1>
-      <button onClick={onShowDetails}>{buttonMessage}</button>
-      {message && <p>{message}</p>}
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <h1>Visibility Toggle</h1>
+        <button onClick={this.handleToggleVisibility}>
+          {this.state.visibility ? 'Hide details' : 'Show details'}
+        </button>
+        {this.state.visibility && (
+          <p>Look at all these fancy secret details!</p>
+        )}
+      </div>
+    );
+  }
+}
 
-  ReactDOM.render(template, appRoot);
-};
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
+
+// PREVIOUS CODE WITHOUT REACT/COMPONENTS/STATE //
+
+// const appRoot = document.getElementById('app');
+
+// // MY SOLUTION //
+// let buttonMessage = 'Show details';
+// let message = '';
+
+// const onShowDetails = () => {
+//   if (buttonMessage === 'Show details') {
+//     buttonMessage = 'Hide details';
+//     message = 'Look at all the details!';
+//   } else {
+//     buttonMessage = 'Show details';
+//     message = '';
+//   }
+
+//   renderVisibilityApp();
+// };
+
+// const renderVisibilityApp = () => {
+//   const template = (
+//     <div>
+//       <h1>Visibility Toggle!</h1>
+//       <button onClick={onShowDetails}>{buttonMessage}</button>
+//       {message && <p>{message}</p>}
+//     </div>
+//   );
+
+//   ReactDOM.render(template, appRoot);
+// };
 
 // COURSE SOLUTION //
 
-let visibility = false;
+// let visibility = false;
 
 // const toggleVisibility = () => {
 //   visibility = !visibility;
@@ -51,4 +87,4 @@ let visibility = false;
 //   ReactDOM.render(jsx, appRoot);
 // };
 
-renderVisibilityApp();
+// renderVisibilityApp();
