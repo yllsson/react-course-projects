@@ -44,6 +44,36 @@ var IndecisionApp = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(IndecisionApp, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      try {
+        var json = localStorage.getItem('options');
+        var options = JSON.parse(json);
+
+        if (options) {
+          this.setState(function () {
+            return {
+              options: options
+            };
+          });
+        } // console.log('Component did mount!', 'Fetching data');
+
+      } catch (error) {}
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json); // console.log('Component did update!', 'Saving data');
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      console.log('Component will unmount!');
+    }
+  }, {
     key: "handleDeleteOptions",
     value: function handleDeleteOptions() {
       this.setState(function () {
@@ -129,7 +159,7 @@ var Action = function Action(props) {
 var Options = function Options(props) {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: props.handleDeleteOptions
-  }, "Remove All"), props.options.map(function (option) {
+  }, "Remove All"), props.options.length === 0 && /*#__PURE__*/React.createElement("p", null, "Please add an option to get started!"), props.options.map(function (option) {
     return /*#__PURE__*/React.createElement(Option, {
       key: option,
       optionText: option,
@@ -166,15 +196,24 @@ var AddOption = /*#__PURE__*/function (_React$Component2) {
 
   _createClass(AddOption, [{
     key: "handleAddOption",
-    value: function handleAddOption(e) {
-      e.preventDefault();
-      var option = e.target.option.value.trim();
+    value: function handleAddOption(event) {
+      event.preventDefault();
+      /* 
+      Finds the event (onSubmit) target (the form) and looks for an element (any) with the attribute -name- of "option" (In this case it finds the text input element).
+      Then grabs the target value and trims it (to get rid of potential spaces around the text) before storing in the option const.
+      */
+
+      var option = event.target.elements.option.value.trim();
       var error = this.props.handleAddOption(option);
       this.setState(function () {
         return {
           error: error
         };
       });
+
+      if (!error) {
+        event.target.elements.option.value = '';
+      }
     }
   }, {
     key: "render",
