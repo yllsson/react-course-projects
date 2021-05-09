@@ -14,8 +14,15 @@ module.exports = {
       {
         loader: 'babel-loader',
         test: /\.js$/,
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: {
+          presets: ['@babel/preset-react', '@babel/preset-env']
+        }
       }
     ]
+  },
+  devtool: 'eval-cheap-module-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'public')
   }
 };

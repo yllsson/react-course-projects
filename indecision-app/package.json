@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",
-    "build": "webpack --watch",
-    "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=@babel/env,@babel/react --watch"
+    "build": "webpack",
+    "dev-server": "webpack serve"
   },
   "dependencies": {
     "@babel/cli": "^7.13.16",
