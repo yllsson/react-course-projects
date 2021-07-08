@@ -1,4 +1,4 @@
-// Object Destructuring
+// Object Destructuring //
 
 // const person = {
 //   name: 'Ylva',
@@ -31,7 +31,7 @@
 
 // console.log(publisherName);
 
-// Array Destructuring
+// Array Destructuring //
 
 // const address = ['1299 S Juniper Street', 'Edinburgh', 'Scotland', '12147'];
 // const [, city, state = 'New York'] = address;
