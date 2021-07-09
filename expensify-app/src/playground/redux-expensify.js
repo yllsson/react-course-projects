@@ -124,6 +124,31 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
   }
 };
 
+// Get visible expenses
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses
+    .filter((expense) => {
+      const startDateMatch =
+        typeof startDate !== 'number' || expense.createdAt >= startDate;
+      const endDateMatch =
+        typeof endDate !== 'number' || expense.createdAt <= endDate;
+      let textMatch = expense.description
+        .toLowerCase()
+        .includes(text.toLowerCase());
+
+      return startDateMatch && endDateMatch && textMatch;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'date') {
+        return a.createdAt < b.createdAt ? 1 : -1;
+      }
+
+      if (sortBy === 'amount') {
+        return a.amount < b.amount ? 1 : -1;
+      }
+    });
+};
+
 // Store creation
 const store = createStore(
   combineReducers({
@@ -134,7 +159,9 @@ const store = createStore(
 
 // Subscribing
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 });
 
 // Dispatch calls
