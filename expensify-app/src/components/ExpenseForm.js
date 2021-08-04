@@ -4,16 +4,14 @@ import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
-const now = moment();
-console.log(now.format('MMM Do, YYYY'));
-
 export default class ExpenseForm extends React.Component {
   state = {
     description: '',
     note: '',
     amount: '',
     createdAt: moment(),
-    calendarFocused: false
+    calendarFocused: false,
+    error: ''
   };
 
   onDescriptionChange = (event) => {
@@ -29,7 +27,7 @@ export default class ExpenseForm extends React.Component {
   onAmountChange = (event) => {
     const amount = event.target.value;
 
-    if (amount.match(/^\d*(\.\d{0,2})?$/)) {
+    if (!amount || amount.match(/^\d+(\.\d{0,2})?$/)) {
       this.setState(() => ({
         amount
       }));
@@ -37,17 +35,42 @@ export default class ExpenseForm extends React.Component {
   };
 
   onDateChange = (createdAt) => {
-    this.setState(() => ({ createdAt }));
+    if (createdAt) {
+      this.setState(() => ({ createdAt }));
+    }
   };
 
   onFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }));
   };
 
+  onSubmit = (event) => {
+    event.preventDefault();
+
+    if (!this.state.description || !this.state.amount) {
+      this.setState(() => ({
+        error: 'Please provide description and amount'
+      }));
+    } else {
+      this.setState(() => ({
+        error: ''
+      }));
+      this.props.onSubmit({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        createdAt: this.state.createdAt.valueOf(),
+        note: this.state.note
+      });
+    }
+  };
+
   render() {
     return (
       <div>
-        <form>
+        {this.state.error && (
+          <h2 style={{ color: 'red' }}>{this.state.error}</h2>
+        )}
+        <form onSubmit={this.onSubmit}>
           <input
             type='text'
             placeholder='Description'
