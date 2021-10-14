@@ -33,3 +33,49 @@ test('should render ExpenseListFilters with alt data properly', () => {
   });
   expect(wrapper).toMatchSnapshot();
 });
+
+test('should handle text change', () => {
+  const value = 'rent';
+  wrapper.find('input').simulate('change', {
+    target: {
+      value
+    }
+  });
+  expect(setTextFilter).toHaveBeenLastCalledWith(value);
+});
+
+test('should sort by date', () => {
+  const value = 'date';
+  wrapper.setProps({
+    filters: altFilters
+  });
+  wrapper.find('select').simulate('change', {
+    target: {
+      value
+    }
+  });
+  expect(sortByDate).toHaveBeenCalled();
+  expect(wrapper.state('sortBy')).toBe;
+});
+
+test('should sort by amount', () => {
+  const value = 'amount';
+  wrapper.find('select').simulate('change', {
+    target: {
+      value
+    }
+  });
+  expect(sortByAmount).toHaveBeenCalled();
+});
+
+test('should handle date changes', () => {
+  wrapper.find('withStyles(DateRangePicker)').prop('onDatesChange')(altFilters);
+  expect(setStartDate).toHaveBeenLastCalledWith(altFilters.startDate);
+  expect(setEndDate).toHaveBeenLastCalledWith(altFilters.endDate);
+});
+
+test('should handle date focus changes', () => {
+  const focused = 'startDate';
+  wrapper.find('withStyles(DateRangePicker)').prop('onFocusChange')(focused);
+  expect(wrapper.state('calendarFocused')).toBe(focused);
+});
